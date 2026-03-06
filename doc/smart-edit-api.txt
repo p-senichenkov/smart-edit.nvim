@@ -1,0 +1,49 @@
+*smart-edit-api.txt*	Smart-edit API reference
+
+TODO: format this file properly
+
+=============
+API reference
+
+=============
+Classes
+
+`EditInfo`		*Smart-edit:EditInfo*
+
+`filename`: `string`	Filename. Propagated to `:edit` unchanged
+`line`: `integer?`	Line number. Defaults to `1`. See note
+`char`: `integer?`	Char number. Defaults to `0`. See note
+
+Note: If neither `line` nor `char` given, `goto` is not being executed.
+Therefore, if the file was opened before, cursor position is unchanged.
+Default values apply only when one argument is specified, while another isn't.
+
+`Provider`		*Smart-edit:Provider*
+
+`CheckFun`: `fun? (param: string): boolean`	Function to check if this provider
+						should be tried
+`ApplyFun`: `fun (param: string): EditInfo?`	The provider itself.
+
+Note: If `ApplyFun` returns `nil`, the next provider is being tried. This
+means that there is no point in defining two similar functions, which differ
+only in return type, like this:
+    `function Check(param) return Apply(param) ~= nil end`
+If you cannot provide lightweight heuristic, just leave `CheckFun = nil`.
+
+=============
+Exposed API
+
+Smart-edit exposes some API, which is available via `require('smart-edit).api`
+
+`GetProviders()`	*Smart-edit:api.GetProviders*
+Get an array of curently active providers' names and descriptions.
+
+`RegisterProvider()`	*Smart-edit:api.RegisterProvider*
+Register new provider at given priority.
+
+Params:
+    `provider`: |Smart-edit:Provider|	provider to be registered
+    `priority`: `integer?`		priority. If not given, inserts to the
+    end (before `:edit`)
+
+vim:tw=78:ts=8:noet:ft=help:norl:
