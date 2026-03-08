@@ -26,4 +26,4 @@ return {
 
 TODO: configuration
 
-See the docs (also available via `:help smart-edit`) for more info
+See the [docs](https://github.com/p-senichenkov/smart-edit.nvim/tree/main/doc) (also available via `:help smart-edit`) for more info
