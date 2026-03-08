@@ -1,6 +1,7 @@
 local M = {}
 
-local controller = require('src.controller')
+local controller = require('smart-edit.controller')
+local util = require('smart-edit.util')
 
 ---@class UcmdInfo
 ---@field Callable fun(args): nil
@@ -19,6 +20,15 @@ M.ApplyProvidersUcmd = {
     Opts = { nargs = '?', complete = 'file' },
 }
 
+M.ListActiveProvidersUcmd = {
+    Callable = function(_)
+        local res = 'Active providers (top-down priority):\n'
+        res = res .. util.Tabulate(controller.GetProviders(), { 'name', 'description' },
+            '   ', '   ')
+        vim.notify(res, vim.log.levels.INFO)
+    end,
+}
+
 ---@param name string
 ---@param ucmd_info UcmdInfo
 local function RegisterUcmd(name, ucmd_info)
@@ -27,6 +37,7 @@ end
 
 function M.RegisterUserCmds()
     RegisterUcmd('SmartEdit', M.ApplyProvidersUcmd)
+    RegisterUcmd('SmartEditListProviders', M.ListActiveProvidersUcmd)
 end
 
 return M

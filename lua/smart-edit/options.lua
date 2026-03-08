@@ -1,6 +1,6 @@
 local M = {}
 
-local providers = require('src.providers')
+local providers = require('smart-edit.providers')
 
 ---@class SmartEditUserOptions
 ---@field providers Provider[]?
@@ -22,10 +22,10 @@ local default_options = {
 ---@type SmartEditOptions
 M.options = default_options
 
----@param user_opts SmartEditUserOptions
+---@param user_opts SmartEditUserOptions?
 ---@return nil
 function M.EnrichOptions(user_opts)
-    for key, value in pairs(user_opts) do
+    for key, value in pairs(user_opts or {}) do
         M.options[key] = value
     end
 end

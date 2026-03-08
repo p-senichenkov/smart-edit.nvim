@@ -1,6 +1,6 @@
 local M = {}
 
-local providers_mod = require('src.providers')
+local providers_mod = require('smart-edit.providers')
 
 --- It is not recommended to access this field directly
 ---@type Provider[]
@@ -17,7 +17,6 @@ local function ApplyProvider(provider, text)
     local e_info = provider.Apply(text)
 
     if e_info then
-        vim.print(e_info)
         vim.api.nvim_cmd({ cmd = 'edit', args = { e_info.filename } }, {})
         if e_info.line or e_info.char then
             local line = e_info.line or 1
@@ -53,8 +52,8 @@ function M.GetProviders()
             name = provider.name or 'Unknown',
             description = provider.description or 'No description'
         }
-        return dumps
     end
+    return dumps
 end
 
 --- Register a single provider as active at given priority (1 is the highest priority).

@@ -1,9 +1,9 @@
 local M = {}
 
-local providers = require('src.providers')
-local controller = require('src.controller')
-local options = require('src.options')
-local ucmds = require('src.ucmds')
+local providers = require('smart-edit.providers')
+local controller = require('smart-edit.controller')
+local options = require('smart-edit.options')
+local ucmds = require('smart-edit.ucmds')
 
 ---@type { string: fun(param: any): any }
 M.api = {
@@ -13,18 +13,19 @@ M.api = {
 
 ---@type Provider[]
 M.available_providers = {
-    providers.FileWithPosProvider,
+    FilenameWithPos = providers.FileWithPosProvider,
 }
 
 ---@type { string: fun(args): nil }
 M.user_cmds = {
-    ApplyProviders = ucmds.ApplyProvidersUcmd,
+    SmartEdit = ucmds.ApplyProvidersUcmd,
+    ListActiveProviders = ucmds.ListActiveProvidersUcmd,
 }
 
 ---@param user_opts SmartEditUserOptions?
 ---@return nil
 function M.setup(user_opts)
-    options.EnrichOptions(user_opts or {})
+    options.EnrichOptions(user_opts)
     local opts = options.options
     controller.RegisterProviders(opts.providers)
 

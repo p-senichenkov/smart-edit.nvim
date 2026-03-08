@@ -1,2 +1,6 @@
+Smart-edit:EditInfo	smart-edit-api.txt	/*Smart-edit:EditInfo*
+Smart-edit:Provider	smart-edit-api.txt	/*Smart-edit:Provider*
+Smart-edit:api.GetProviders	smart-edit-api.txt	/*Smart-edit:api.GetProviders*
+Smart-edit:api.RegisterProvider	smart-edit-api.txt	/*Smart-edit:api.RegisterProvider*
 smart-edit-api.txt	smart-edit-api.txt	/*smart-edit-api.txt*
 smart-edit.txt	smart-edit.txt	/*smart-edit.txt*

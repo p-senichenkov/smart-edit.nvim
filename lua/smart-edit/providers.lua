@@ -15,6 +15,8 @@ local M = {}
 ---@field name string?
 ---@field description string?
 
+-- NOTE: Mulitline descriptions are allowed.
+
 ---@type Provider
 M.FileWithPosProvider = {
     Check = function(path)
@@ -35,13 +37,13 @@ M.FileWithPosProvider = {
     description = 'Parses path/to/file:line:char into {"path/to/file", line, char}',
 }
 
+-- This is a fallback provider, and it shouldn't be used directly
 M.NativeEditProvider = {
     Apply = function (path)
         vim.api.nvim_cmd({ cmd = 'edit', args = { path } }, {})
     end,
     name = ':edit',
-    description = [[Apply vim' native `:edit` command.
-This is a fallback provider and you shouldn't use it directly]],
+    description = [[Apply vim's native `:edit` command.]],
 }
 
 return M
