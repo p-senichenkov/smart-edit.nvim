@@ -40,7 +40,9 @@ M.FileWithPosProvider = {
 -- This is a fallback provider, and it shouldn't be used directly
 M.NativeEditProvider = {
     Apply = function (path)
-        vim.api.nvim_cmd({ cmd = 'edit', args = { path } }, {})
+        return {
+            filename = path
+        }
     end,
     name = ':edit',
     description = [[Apply vim's native `:edit` command.]],

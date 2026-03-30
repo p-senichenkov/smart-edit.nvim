@@ -10,12 +10,12 @@ local util = require('smart-edit.util')
 ---@type UcmdInfo
 M.ApplyProvidersUcmd = {
     Callable = function(args)
-        if not args.args or #args.args == 0 then
+        if not args.args or #vim.fn.trim(args.args) == 0 then
             vim.cmd('edit')
             return
         end
 
-        controller.ApplyProviders(args.args)
+        controller.ApplyProviders(vim.fn.trim(args.args))
     end,
     Opts = { nargs = '?', complete = 'file' },
 }

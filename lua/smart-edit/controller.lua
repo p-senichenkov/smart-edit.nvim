@@ -1,6 +1,7 @@
 local M = {}
 
 local providers_mod = require('smart-edit.providers')
+local logger = require('smart-edit.logger')
 
 --- It is not recommended to access this field directly
 ---@type Provider[]
@@ -33,9 +34,11 @@ end
 function M.ApplyProviders(text)
     for _, provider in ipairs(M.providers) do
         if ApplyProvider(provider, text) then
+            logger.log('Applied provider ' .. provider.name)
             return
         end
     end
+    logger.log('None of the providers applied...')
 end
 
 ---@class ProviderDump
